@@ -1,3 +1,4 @@
+# Importowanie potrzebnych bibliotek
 import cv2
 import smtplib, ssl
 import time
@@ -6,6 +7,7 @@ from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+# Dodawanie potrzebnych do wysyłania maila zmiennych
 smtp_server = 'smtp.yandex.ru'
 port = 465
 sender = 'awesome.z.d@yandex.com'
