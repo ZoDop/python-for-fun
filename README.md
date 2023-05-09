@@ -32,7 +32,8 @@ while True:
     ret, frame = cap.read()
 # Wyświetlanie obrazu
     cv2.imshow('Camera', frame)
-
+  
+# Zapisanie klatki do pliku
     cv2.imwrite('camera_image.jpg',frame)
 # Konwersja klatki na skalę szarości i rozmycie
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -51,24 +52,24 @@ while True:
         if cv2.contourArea(contour) > threshold:
             motion_detected = True
             break
-
-
+# Wysyłanie maila, jeśli wykryto ruch
     if motion_detected:
         tresc = """To jest pierwszy e-mail wysłany w pythonie.
         """
-
         plik = "camera_image.jpg"
 
 # Zapisywanie obrazu do pliku tymczasowego
         cv2.imwrite('temp.jpg', frame)
-
+# Tworzenie wiadomości e-mail
         message = MIMEMultipart()
         message["From"] = sender
         message["To"] = receiver
         message["Subject"] = subject
-
+        
+# Dodanie treści wiadomości
         message.attach(MIMEText(tresc, "plain"))
-# Zapisywanie obrazu do pliku tymczasowego
+        
+# Dodanie pliku z obrazem jako załącznik
         cv2.imwrite('temp.jpg', frame)
 
         with open(plik, "rb") as f:
@@ -81,14 +82,15 @@ while True:
             "Content-Disposition",
             "attachment; filename=" + plik
         )
-
+# Dodanie załącznika do wiadomości e-mail
         message.attach(zalacznik)
         text = message.as_string()
 
         ssl_context = ssl.create_default_context()
-
+# Połączenie z SMTP i zalogowanie się na konto nadawcy
         with smtplib.SMTP_SSL(smtp_server, port, context=ssl_context) as server:
             server.login(sender, password)
+# Wysyłanie wiadomości e-mail
             server.sendmail(sender, receiver, text)
 
 # Aktualizacja tła
