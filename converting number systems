@@ -1,0 +1,112 @@
+def dec_to_bin(number):
+    table = {0: '0', 1: '1', 2: '2', 3: '3',
+             4: '4', 5: '5', 6: '6', 7: '7',
+             8: '8', 9: '9', 10: 'A', 11: 'B',
+             12: 'C', 13: 'D', 14: 'E', 15: 'F'}
+    result = ""
+    while number > 0:
+        reminder = number % 8
+        result = table[reminder] + result
+        number = number // 8
+    return result
+print(dec_to_bin(78))
+
+def bin_to_dec(strung):
+    table = {'0': 0, '1': 1, '2': 2, '3': 3,
+             '4': 4, '5': 5, '6': 6, '7': 7,
+             '8': 8, '9': 9, 'A': 10, 'B': 11,
+             'C': 12, 'D': 13, 'E': 14, 'F': 15}
+    result = 0
+    exponent = len(strung) - 1
+    for i in strung:
+        result = result + table[i] * 2 ** exponent
+        exponent -= 1
+    return result
+print(bin_to_dec("010101010101"))
+
+
+def from_binary_to_decimal(binary):
+    number = 0
+    exponent = len(binary) - 1
+    for digit in binary:
+        if digit == "1":
+            number += 2 ** exponent
+            exponent -= 1
+        else:
+            number += 0
+            exponent -= 1
+    return number
+print(from_binary_to_decimal("101101"))
+
+
+
+
+def from_hex_to_decimal(hex):
+    number = 0
+    exponent = len(hex) - 1
+    for digit in hex:
+        if digit == "1":
+            number += (16 ** exponent) * 1
+            exponent -= 1
+        elif digit == "2":
+            number += (16 ** exponent) * 2
+            exponent -= 1
+        elif digit == "3":
+            number += (16 ** exponent) * 3
+            exponent -= 1
+        elif digit == "4":
+            number += (16 ** exponent) * 4
+            exponent -= 1
+        elif digit == "5":
+            number += (16 ** exponent) * 5
+            exponent -= 1
+        elif digit == "6":
+            number += (16 ** exponent) * 6
+            exponent -= 1
+        elif digit == "7":
+            number += (16 ** exponent) * 7
+            exponent -= 1
+        elif digit == "8":
+            number += (16 ** exponent) * 8
+            exponent -= 1
+        elif digit == "9":
+            number += (16 ** exponent) * 9
+            exponent -= 1
+        elif digit == "a":
+            number += (16 ** exponent) * 10
+            exponent -= 1
+        elif digit == "b":
+            number += (16 ** exponent) * 11
+            exponent -= 1
+        elif digit == "c":
+            number += (16 ** exponent) * 12
+            exponent -= 1
+        elif digit == "d":
+            number += (16 ** exponent) * 13
+            exponent -= 1
+        elif digit == "e":
+            number += (16 ** exponent) * 14
+            exponent -= 1
+        elif digit == "f":
+            number += (16 ** exponent) * 15
+            exponent -= 1
+    return number
+print(from_hex_to_decimal("234f"))
+
+def from_decimal_to_pentimal(number):
+    result = ""
+    while number > 0:
+        remainder = number % 5
+        result = str(remainder) + result
+        number = number // 5
+    return result
+print(from_decimal_to_pentimal(27))
+
+def from_pentimal_to_decimal(string):
+    result = 0
+    exponent = len(string) - 1
+    for digit in string:
+        result += int(digit) * 5 ** exponent
+        exponent -= 1
+    return result
+print(from_pentimal_to_decimal("102"))
