@@ -1,0 +1,106 @@
+a = input("Podaj liczbę dziesiętna:")
+a = int(a)
+b = input("Podaj liczbę binarna:")
+
+def from_binary_to_decimal(b):
+    number = 0
+    exponent = len(b) - 1
+    for digit in b:
+        if digit == "1":
+            number += 2 ** exponent
+            exponent -= 1
+        else:
+            number += 0
+            exponent -= 1
+    return number
+
+b = from_binary_to_decimal(b)
+b = int(b)
+
+c = input("Podaj liczbę hexalna:")
+def from_hex_to_decimal(c):
+    number = 0
+    exponent = len(c) - 1
+    for digit in c:
+        if digit == "1":
+            number += (16 ** exponent) * 1
+            exponent -= 1
+        elif digit == "2":
+            number += (16 ** exponent) * 2
+            exponent -= 1
+        elif digit == "3":
+            number += (16 ** exponent) * 3
+            exponent -= 1
+        elif digit == "4":
+            number += (16 ** exponent) * 4
+            exponent -= 1
+        elif digit == "5":
+            number += (16 ** exponent) * 5
+            exponent -= 1
+        elif digit == "6":
+            number += (16 ** exponent) * 6
+            exponent -= 1
+        elif digit == "7":
+            number += (16 ** exponent) * 7
+            exponent -= 1
+        elif digit == "8":
+            number += (16 ** exponent) * 8
+            exponent -= 1
+        elif digit == "9":
+            number += (16 ** exponent) * 9
+            exponent -= 1
+        elif digit == "a":
+            number += (16 ** exponent) * 10
+            exponent -= 1
+        elif digit == "b":
+            number += (16 ** exponent) * 11
+            exponent -= 1
+        elif digit == "c":
+            number += (16 ** exponent) * 12
+            exponent -= 1
+        elif digit == "d":
+            number += (16 ** exponent) * 13
+            exponent -= 1
+        elif digit == "e":
+            number += (16 ** exponent) * 14
+            exponent -= 1
+        elif digit == "f":
+            number += (16 ** exponent) * 15
+            exponent -= 1
+    return number
+
+c = from_hex_to_decimal(c)
+c = int(c)
+
+d = input("Podaj liczbę osemkowa:")
+def from_pentimal_to_decimal(d):
+    result = 0
+    exponent = len(d) - 1
+    for digit in d:
+        result += int(digit) * 8 ** exponent
+        exponent -= 1
+    return result
+d = from_pentimal_to_decimal(d)
+d = int(d)
+
+
+if a > b and a > c and a > d:
+    print("Maksymalna liczba to:", a)
+elif b > a and b > c and b > d:
+    print("Maksymalna liczba to:", b)
+elif c > a and c > b and c > d:
+    print("Maksymalna liczba to:", c)
+elif d > a and d > b and d > c:
+    print("Maksymalna liczba to:", d)
+
+if a < b and a < c and a < d:
+    print("Minimalna liczba to:", a)
+elif b < a and b < c and b < d:
+    print("Minimalna liczba to:", b)
+elif c < a and c < b and c < d:
+    print("Mininmalna liczba to:", c)
+elif d < a and d < b and d < c:
+    print("Minimalna liczba to:", d)
+
+if a == b and a == c and a == d:
+    print("wszystkie są równ
