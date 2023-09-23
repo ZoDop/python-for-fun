@@ -1,0 +1,399 @@
+# The original game scenario was formulated in 1994 by Kaushik Basu and goes as follows:
+# An airline loses two suitcases belonging to two different travelers. Both suitcases happen to be identical and contain identical antiques.
+# An airline manager tasked to settle the claims of both travelers explains that the airline is liable for a maximum of $100 per suitcase
+# —he is unable to find out directly the price of the antiques.
+# To determine an honest appraised value of the antiques, the manager separates both travelers so they can't confer,
+# and asks them to write down the amount of their value at no less than $20 and no larger than $100.
+# He also tells them that if both write down the same number, he will treat that number as the true dollar value of both suitcases
+# and reimburse both travelers that amount. However, if one writes down a smaller number than the other,
+# this smaller number will be taken as the true dollar value, and both travelers will receive that amount along with a bonus/malus:
+# $10 extra will be paid to the traveler who wrote down the lower value and a $10 deduction will be taken from the person who wrote down the higher amount.
+# The challenge is: what strategy should both travelers follow to decide the value they should write down?
+# https://en.wikipedia.org/wiki/Traveler%27s_dilemma
+
+import random
+
+# MIN_PRICE = 20
+# MAX_PRICE = 100
+# BONUS = 10
+# ROUNDS = 100
+# current_round, your_score, enemy_score - integers
+# your-choices, enemy_choices - arrays of 100 integers
+
+
+def get_first_player_choice(current_round, your_score, enemy_score, your_choices, enemy_choices):
+    sum = 0
+    second_player_choice = enemy_choices[current_round - 1]
+    loop = 1
+    if current_round == 0:
+        return 90
+    if current_round == 1:
+        return 50
+    if current_round == 2:
+        return 40
+    for i in range(0, current_round - 1):
+        sum += enemy_choices[i - 1]
+        loop = i
+    average = round(sum / loop)
+
+    if average <= second_player_choice:
+        if (average < 31) or (average > 120):
+            return 20
+        else:
+            return min(average, second_player_choice) - 1
+
+    if (second_player_choice - 10 < 31) or (second_player_choice > 120):
+        return 20
+    else:
+        return min(average, second_player_choice - 1) - 1
+
+
+         # random.randint(20, 120)
+
+def get_first_player_choice(current_round, your_score, enemy_score, your_choices, enemy_choices):
+    sum = 0
+    second_player_choice = enemy_choices[current_round - 1]
+    loop = 1
+    if current_round == 0:
+        return 90
+    if current_round == 1:
+        return 50
+    if current_round == 2:
+        return 40
+    for i in range(0, current_round - 1):
+        sum += enemy_choices[i - 1]
+        loop = i
+    average = round(sum / loop)
+
+    if average <= second_player_choice:
+        if (average < 31) or (average > 120):
+            return 20
+        else:
+            return min(average, second_player_choice)-1
+
+    if (second_player_choice - 10 < 31) or (second_player_choice > 120):
+        return 20
+    else:
+        return min(average, second_player_choice)-1
+#         # random.randint(20, 120)
+
+
+
+
+def get_second_player_choice(current_round, your_score, enemy_score, your_choices, enemy_choices):
+    sum = 0
+    second_player_choice = enemy_choices[current_round - 1]
+    loop = 1
+    if current_round == 0:
+        return 20
+    if current_round == 1:
+        return 20
+    if current_round == 2:
+        return 20
+    value = (((-0.5 * second_player_choice * second_player_choice) + (96.5 * second_player_choice) + 203) / 99) + 10
+    average = value
+
+    if average <= second_player_choice:
+        if (average < 31) or (average > 120):
+            return 20
+        else:
+            return min(average, second_player_choice) - 1
+
+    if (second_player_choice < 31) or (second_player_choice > 120):
+        return 20
+    else:
+        return min(average, second_player_choice - 1) - 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # sum = 0
+    # bonus = 10
+    # first_player_choice = your_choices[current_round - 1]
+    # second_player_choice = enemy_choices[current_round - 1]
+    # loop = 1
+    # if current_round == 0:
+    #     return 90
+    # if current_round == 1:
+    #     return 50
+    # if current_round == 2:
+    #     return 40
+    # for i in range(0, current_round - 1):
+    #     sum = sum + enemy_choices[i - 1]
+    #     loop = i
+    # average = round(sum / (loop+1))
+    #
+    # if first_player_choice < second_player_choice:
+    #     first_player_score = first_player_choice + bonus
+    #     second_player_score = first_player_choice - bonus
+    #
+    # else:
+    #     first_player_score = second_player_choice - bonus
+    #     second_player_score = second_player_choice + bonus
+    # if average <= second_player_choice:
+    #     if (average < 31) or (average > 120):
+    #         return 20
+    #     else:
+    #         return average
+    # else:
+    #     if (second_player_choice - 10 < 31) or (second_player_choice > 120) or (second_player_choice - 1) > 19:
+    # #         return 20
+    #     else:
+    #         return (second_player_choice - 1)
+
+
+
+
+    #         # random.randint(20, 120)
+    # sum = 0
+    # bonus = 10
+    # first_player_choice = your_choices[current_round - 1]
+    # second_player_choice = enemy_choices[current_round - 1]
+    # loop = 1
+    # if current_round == 0:
+    #     return 90
+    # if current_round == 1:
+    #     return 50
+    # if current_round == 2:
+    #     return 40
+    # for i in range(0, current_round - 1):
+    #     sum = sum + enemy_choices[i - 1]
+    #     loop = i
+    # average = round(sum / loop)
+    #
+    # if first_player_choice < second_player_choice:
+    #     first_player_score = first_player_choice + bonus
+    #     second_player_score = first_player_choice - bonus
+    #
+    # else:
+    #     first_player_score = second_player_choice - bonus
+    #     second_player_score = second_player_choice + bonus
+    # if average <= second_player_choice:
+    #     if (average < 31) and (average >120):
+    #         return 20
+    #     else:
+    #         return average
+    # else:
+    #     if (second_player_choice - 10 < 31) and (second_player_choice > 120):
+    #         return 20
+    #     else:
+    #         return second_player_choice
+    # random.randint(20, 120)
+
+
+
+
+    # if current_round == 0:
+    #     return 21
+    # elif current_round == 1:
+    #     return 21
+    # elif current_round == 2:
+    #     return 60
+    # elif current_round == 3:
+    #     return enemy_choices[current_round - 1] - 5
+    # elif current_round == 4:
+    #     return enemy_choices[current_round - 1] - 15
+    # while current_round > 4:
+    #     if enemy_choices[current_round - 1] == your_choices[current_round - 2] - 12:
+    #         if your_choices[current_round - 2] - 13 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 13
+    #     elif enemy_choices[current_round - 1] == your_choices[current_round - 2] - 11:
+    #         if your_choices[current_round - 2] - 12 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 12
+    #     elif enemy_choices[current_round - 1] == your_choices[current_round - 2] - 10:
+    #         if your_choices[current_round - 2] - 11 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 11
+    #     elif enemy_choices[current_round - 1] == your_choices[current_round - 2] - 9:
+    #         if your_choices[current_round - 2] - 10 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 10
+    #     elif enemy_choices[current_round - 1] == your_choices[current_round - 2] - 8:
+    #         if your_choices[current_round - 2] - 9 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 9
+    #     elif enemy_choices[current_round - 1] == your_choices[current_round - 2] - 7:
+    #         if your_choices[current_round - 2] - 8 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 8
+    #     elif enemy_choices[current_round - 1] == your_choices[current_round - 2] - 6:
+    #         if your_choices[current_round - 2] - 7 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 7
+    #     elif enemy_choices[current_round - 1] == your_choices[current_round - 2] - 5:
+    #         if your_choices[current_round - 2] - 6 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 6
+    #     elif enemy_choices[current_round - 1] == your_choices[current_round - 2] - 4:
+    #         if your_choices[current_round - 2] - 5 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 5
+    #     elif enemy_choices[current_round - 1] == your_choices[current_round - 2] - 3:
+    #         if your_choices[current_round - 2] - 4 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 4
+    #     elif enemy_choices[current_round - 1] == your_choices[current_round - 2] - 2:
+    #         if your_choices[current_round - 2] - 3 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 3
+    #     elif enemy_choices[current_round - 1] == your_choices[current_round - 2] - 1:
+    #         if your_choices[current_round - 2] - 2 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 2
+    #     else:
+    #         if your_choices[current_round - 2] - 10 < 20:
+    #             return random.randint(20, 120)
+    #         else:
+    #             return your_choices[current_round - 2] - 10
+
+
+    # def sign(x):
+    #     if x < 0:
+    #         return -1
+    #     if x == 0:
+    #         return 0
+    #     return 1
+    # if current_round == 0:
+    #     return 93
+    # if current_round == 1:
+    #     return 100 - (enemy_choices[current_round - 1] * your_score - your_choices[current_round - 1] * enemy_score) \
+    #            % 41
+    # if current_round == 2:
+    #     return 100 - (enemy_choices[current_round - 1] * your_score - your_choices[current_round - 1] * enemy_score) \
+    #            % 41
+    # if enemy_choices[current_round - 1] == enemy_choices[current_round - 2] < 81:
+    #     if enemy_choices[current_round - 1] - 1 < 20:
+    #         return 20
+    #     return enemy_choices[current_round - 1] - 1
+    #
+    # if (enemy_choices[current_round - 1] < 61 and enemy_choices[current_round - 2] < 61) or \
+    #         (enemy_choices[current_round - 2] < 61 and enemy_choices[current_round - 1] < 61):
+    #     return (enemy_choices[current_round - 1] + enemy_choices[current_round - 2]) % 40 + 23 - random.randint(1, 3)
+    #
+    # p_next_ret = min(enemy_choices[current_round - 1], your_choices[current_round - 1]) \
+    #              + 2 * sign(enemy_choices[current_round - 1] - your_choices[current_round - 1])
+    #
+    # if p_next_ret > 100:
+    #     return 200 - p_next_ret
+    # if p_next_ret < 23:
+    #     return 20
+    # return p_next_ret
+
+# Ctrl + / to remove comments
+# 1. random bot
+#def get_first_player_choice(current_round, your_score, enemy_score, your_choices, enemy_choices):
+#   return random.randint(70, 120)
+
+
+# 2. constant bot
+# def get_first_player_choice(current_round, your_score, enemy_score, your_choices, enemy_choices):
+#     return 60
+
+
+# 3. very nice bot
+#def get_first_player_choice(current_round, your_score, enemy_score, your_choices, enemy_choices):
+    # if current_round == 0:
+    #     return 100
+    # else:
+    #     return enemy_choices[current_round - 1]
+
+
+    # return enemy_choices [current_round - 1]
+
+def game():
+    min_price = 20
+    max_price = 100
+    bonus = 10
+    rounds = 100
+
+    first_player_choices = [0 for i in range(0, rounds)]
+    second_player_choices = [0 for i in range(0, rounds)]
+    first_player_total_score = 0
+    second_player_total_score = 0
+
+    for currentRound in range(0, rounds):
+        first_player_choices_temp = []
+        second_player_choices_temp = []
+        for i in range(0, rounds):
+            first_player_choices_temp.append(first_player_choices[i])
+            second_player_choices_temp.append(second_player_choices[i])
+        first_player_choice = get_first_player_choice(currentRound, first_player_total_score, second_player_total_score, first_player_choices_temp, second_player_choices_temp)
+
+        first_player_choices_temp = []
+        second_player_choices_temp = []
+        for i in range(0, rounds):
+            first_player_choices_temp.append(first_player_choices[i])
+            second_player_choices_temp.append(second_player_choices[i])
+        second_player_choice = get_second_player_choice(currentRound, second_player_total_score, first_player_total_score, second_player_choices_temp, first_player_choices_temp)
+
+        first_player_choices[currentRound] = first_player_choice
+        second_player_choices[currentRound] = second_player_choice
+
+        first_player_score = -1
+        second_player_score = -1
+
+        if first_player_choice < min_price or first_player_choice > max_price:
+            first_player_score = 0
+            if min_price <= second_player_choice <= max_price:
+                second_player_score = second_player_choice + bonus
+
+        if second_player_choice < min_price or second_player_choice > max_price:
+            second_player_score = 0
+            if min_price <= first_player_choice <= max_price:
+                first_player_score = first_player_choice + bonus
+
+        if first_player_score == -1 and second_player_score == -1:
+            if first_player_choice == second_player_choice:
+                first_player_score = second_player_score = first_player_choice
+            elif first_player_choice < second_player_choice:
+                first_player_score = first_player_choice + bonus
+                second_player_score = first_player_choice - bonus
+            else:
+                first_player_score = second_player_choice - bonus
+                second_player_score = second_player_choice + bonus
+
+        first_player_total_score += first_player_score
+        second_player_total_score += second_player_score
+
+        print("First player choice: {0} and score: + {1} (= {2}), second player choice {3} and score: + {4} (= {5}).\n"
+              .format(first_player_choice, first_player_score, first_player_total_score, second_player_choice, second_player_score, second_player_total_score))
+
+    print("First player score: {0}, second player score: {1}.".format(first_player_total_score, second_player_total_score))
+    print("First player choices: ", first_player_choices)
+    print("Second player choices: ", second_player_choices)
+
+
+if __name__ == '__main__':
+    game()
